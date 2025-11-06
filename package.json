@@ -1,7 +1,7 @@
 {
   "name": "lazy-init-for-cf-workers",
   "version": "1.0.0",
-  "description": "Lazy initialization utility function for Cloudflare Workers Runtime.",
+  "description": "Utility function for lazy initialization for Cloudflare Workers Runtime.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
