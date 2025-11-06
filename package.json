@@ -1,0 +1,16 @@
+{
+  "name": "lazy-init-for-cf-workers",
+  "version": "1.0.0",
+  "description": "Lazy initialization utility function for Cloudflare Workers Runtime.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "tanstack"
+  ],
+  "author": "Ben Senescu",
+  "license": "ISC"
+}
