@@ -31,13 +31,13 @@ export function lazyInitForCFWorkers<T extends object>(factory: () => T): T {
   }
 
   return new Proxy({} as T, {
-    get(_target, prop, _receiver) {
+    get(_target, prop, receiver) {
       const inst = getInstance();
-      return Reflect.get(inst, prop, inst);
+      return Reflect.get(inst, prop, receiver);
     },
-    set(_target, prop, value, _receiver) {
+    set(_target, prop, value, receiver) {
       const inst = getInstance();
-      return Reflect.set(inst, prop, value, inst);
+      return Reflect.set(inst, prop, value, receiver);
     },
     deleteProperty(_target, prop) {
       const inst = getInstance();
@@ -55,9 +55,33 @@ export function lazyInitForCFWorkers<T extends object>(factory: () => T): T {
       const inst = getInstance();
       return Reflect.getOwnPropertyDescriptor(inst, prop);
     },
+    defineProperty(_target, prop, descriptor) {
+      const inst = getInstance();
+      return Reflect.defineProperty(inst, prop, descriptor);
+    },
     getPrototypeOf(_target) {
       const inst = getInstance();
       return Reflect.getPrototypeOf(inst);
+    },
+    setPrototypeOf(_target, proto) {
+      const inst = getInstance();
+      return Reflect.setPrototypeOf(inst, proto);
+    },
+    isExtensible(_target) {
+      const inst = getInstance();
+      return Reflect.isExtensible(inst);
+    },
+    preventExtensions(_target) {
+      const inst = getInstance();
+      return Reflect.preventExtensions(inst);
+    },
+    apply(_target, thisArg, args) {
+      const inst = getInstance();
+      return Reflect.apply(inst as any, thisArg, args);
+    },
+    construct(_target, args, newTarget) {
+      const inst = getInstance();
+      return Reflect.construct(inst as any, args, newTarget);
     },
   });
 }
