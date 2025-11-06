@@ -18,6 +18,14 @@
   ],
   "author": "Ben Senescu",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bensenescu/lazy-init-for-cf-workers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bensenescu/lazy-init-for-cf-workers/issues"
+  },
+  "homepage": "https://github.com/bensenescu/lazy-init-for-cf-workers#readme",
   "devDependencies": {
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
