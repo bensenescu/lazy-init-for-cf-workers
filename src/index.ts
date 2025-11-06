@@ -31,35 +31,31 @@ export function lazyInitForCFWorkers<T extends object>(factory: () => T): T {
   }
 
   return new Proxy({} as T, {
-    get(_, prop) {
+    get(_target, prop, _receiver) {
       const inst = getInstance();
-      const value = inst[prop as keyof T];
-      // Bind methods to the instance to preserve `this` context
-      return typeof value === "function" ? value.bind(inst) : value;
+      return Reflect.get(inst, prop, inst);
     },
-    set(_, prop, value) {
+    set(_target, prop, value, _receiver) {
       const inst = getInstance();
-      (inst as any)[prop] = value;
-      return true;
+      return Reflect.set(inst, prop, value, inst);
     },
-    deleteProperty(_, prop) {
+    deleteProperty(_target, prop) {
       const inst = getInstance();
-      delete (inst as any)[prop];
-      return true;
+      return Reflect.deleteProperty(inst, prop);
     },
-    has(_, prop) {
+    has(_target, prop) {
       const inst = getInstance();
-      return prop in inst;
+      return Reflect.has(inst, prop);
     },
-    ownKeys(_) {
+    ownKeys(_target) {
       const inst = getInstance();
       return Reflect.ownKeys(inst);
     },
-    getOwnPropertyDescriptor(_, prop) {
+    getOwnPropertyDescriptor(_target, prop) {
       const inst = getInstance();
       return Reflect.getOwnPropertyDescriptor(inst, prop);
     },
-    getPrototypeOf(_) {
+    getPrototypeOf(_target) {
       const inst = getInstance();
       return Reflect.getPrototypeOf(inst);
     },
